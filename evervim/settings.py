@@ -147,9 +147,9 @@ LOGGING = {
     }
 }
 
-EVERNOTE_HOST = ""
-EVERNOTE_KEY = ""
-EVERNOTE_SECRET = ""
+EVERNOTE_HOST = os.environ['EVERNOTE_HOST']
+EVERNOTE_KEY = os.environ['EVERNOTE_KEY']
+EVERNOTE_SECRET = os.environ['EVERNOTE_SECRET']
 EVERNOTE_OAUTH_TOKEN_VALIDITY = 1 # OAuth token validity in days: 1 for dev,
                                   # 365 for prod after activation
 
