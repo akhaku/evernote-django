@@ -1,4 +1,66 @@
-.vimText {
-  width:100%;
-  height:100%;
+html, body {
+    font-family: Helvetica;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#header {
+    background-color: #610B0B;
+    color: white;
+}
+#header div.left {
+    padding-top: 50px;
+    margin-left: 250px;
+    margin-right: auto;
+    width: 400px;
+    height: 80px;
+    font-size: 40px;
+    letter-spacing: 2px;
+    float: left;
+}
+
+#header div.right {
+    padding-top: 50px;
+    width: 300px;
+    float: right;
+}
+#wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    height: 100%;
+}
+
+.note {
+    width: 100px;
+    min-height: 50px;
+    padding: 10px;
+    margin: 5px;
+    float: left;
+    background-color: #F8E0E0;
+    font-size: 20px;
+    border: 2px solid #F78181;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+}
+
+div.clearfix {
+    clear: both;
+}
+
+div#all-notes {
+    margin: 5px;
+    width: 300px;
+    float: left;
+}
+
+div#text-box {
+    width: 500px;
+    padding: 0px;
+    margin: 5px;
+    float: left;
+}
+textarea {
+    font-size: 12px;
 }

@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 {% block body %}
-<h1>Hello World</h1>
+<div id="all-notes">
+{% for note in notes %}
+<div class="note" rel="{{ note.id }}">{{ note.title }}</div>
+{% endfor %}
+</div>
+<div id="text-box">
+    <textarea rows="30" cols="70"></textarea>
+</div>
 {% endblock body %}
 {% block extrastyle %}
 <link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" />
 {% endblock extrastyle %}
 {% block extrascript %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/vim.js"></script>
+<script type="text/javascript">
+    $(function() {
+        noteClickHandlers("{% url edit.views.edit_note %}");
+    });
+</script>
 {% endblock extrascript %}

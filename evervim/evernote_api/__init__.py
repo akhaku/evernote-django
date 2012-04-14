@@ -103,3 +103,9 @@ class EvernoteAPI:
         notes = notestore.findNotes(self.oauth_token, nFilter, 0, 10)
         return notes.notes
 
+    def get_note_text(self, guid):
+        notestore = self._get_note_store()
+        note = notestore.getNote(self.oauth_token, guid, True, False,
+                False, False)
+        text = note.content
+        return text
