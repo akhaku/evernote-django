@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'evernote_api',
     'gunicorn',
     'south',
+    'thrift',
 )
 
 # A sample logging configuration. The only tangible logging

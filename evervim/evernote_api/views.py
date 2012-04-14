@@ -20,5 +20,7 @@ def get_evernote_token(request):
             expires_time = datetime.now()
         profile.evernote_token = credentials['oauth_token']
         profile.evernote_token_expires_time = expires_time
+        profile.evernote_shard = credentials['edam_shard']
+        profile.evernote_uid = credentials['edam_userId']
         profile.save()
     return HttpResponseRedirect(reverse('edit.views.home', args=[]))
