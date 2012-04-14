@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Evervim</title>
+        {% block extrastyle %}
+        {{ extrastyle }}
+        {% endblock extrascript %}
+    </head>
+    <body>
+        {% block body %}
+        {{ body }}
+        {% endblock body %}
+        {% block extrascript %}
+        {{ extrascript }}
+        {% endblock extrascript }}
+    </body>
+</html>
