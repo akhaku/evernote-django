@@ -1,4 +1,5 @@
 venv
 *.pyc
-vimernote/settingslocal.py
+evervim/settingslocal.py
+evervim/static/admin
 *.swp
