@@ -108,6 +108,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'account',
+    'bs4',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -120,6 +121,7 @@ INSTALLED_APPS = (
     'evernote_api',
     'gunicorn',
     'south',
+    'thrift',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -145,9 +147,9 @@ LOGGING = {
     }
 }
 
-EVERNOTE_HOST = ""
-EVERNOTE_KEY = ""
-EVERNOTE_SECRET = ""
+EVERNOTE_HOST = os.environ['EVERNOTE_HOST']
+EVERNOTE_KEY = os.environ['EVERNOTE_KEY']
+EVERNOTE_SECRET = os.environ['EVERNOTE_SECRET']
 EVERNOTE_OAUTH_TOKEN_VALIDITY = 1 # OAuth token validity in days: 1 for dev,
                                   # 365 for prod after activation
 

@@ -2,10 +2,15 @@
     https://github.com/leehsueh/django-evernote-oauth/. Many many thanks to him
     for doing the legwork!
 """
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from evernote.edam.notestore import NoteStore
+from evernote.edam.notestore.ttypes import NoteFilter
 from time import time
 from urllib import urlencode
+import thrift.protocol.TBinaryProtocol as TBinaryProtocol
+from thrift.transport import THttpClient
 import urllib2
 import urlparse
 
@@ -84,3 +89,25 @@ class EvernoteAPI:
         else:
             return None
 
+    def _get_note_store(self):
+        noteStoreUri =  self.noteStoreUriBase + self.shard
+        noteStoreHttpClient = THttpClient.THttpClient(noteStoreUri)
+        noteStoreProtocol = TBinaryProtocol.TBinaryProtocol(noteStoreHttpClient)
+        noteStore = NoteStore.Client(noteStoreProtocol)
+        return noteStore
+
+    def get_notes_with_tag(self, tag):
+        notestore = self._get_note_store()
+        allTags = notestore.listTags(self.oauth_token)
+        tag = [x for x in allTags if x.name == tag][0]
+        nFilter = NoteFilter(tagGuids=[tag.guid])
+        notes = notestore.findNotes(self.oauth_token, nFilter, 0, 10)
+        return notes.notes
+
+    def get_note_text(self, guid):
+        notestore = self._get_note_store()
+        note = notestore.getNote(self.oauth_token, guid, True, False,
+                False, False)
+        text = note.content
+        soup = BeautifulSoup(text)
+        return soup.find('en-note').get_text()
