@@ -1,5 +1,4 @@
 venv
 *.pyc
 vimernote/settingslocal.py
-vimernote/static/admin
 *.swp
