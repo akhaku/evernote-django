@@ -1,0 +1,2 @@
+# Vimernote #
+Authors: akhaku (Ammar Khaku), ealter (Eliot Alter)
