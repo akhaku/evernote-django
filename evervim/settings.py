@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'evernote',
+    'evernote_auth',
     'south',
     'edit',
 )
@@ -142,6 +143,12 @@ LOGGING = {
         },
     }
 }
+
+EVERNOTE_HOST = ""
+EVERNOTE_KEY = ""
+EVERNOTE_SECRET = ""
+EVERNOTE_OAUTH_TOKEN_VALIDITY = 1 # OAuth token validity in days: 1 for dev,
+                                  # 365 for prod after activation
 
 try:
     from settingslocal import *
