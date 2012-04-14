@@ -115,10 +115,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'edit',
     'evernote',
     'evernote_api',
+    'gunicorn',
     'south',
-    'edit',
 )
 
 # A sample logging configuration. The only tangible logging
