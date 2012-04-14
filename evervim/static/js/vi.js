@@ -3472,52 +3472,6 @@ function _redraw_term() {
 	}
 	zx = undefined; // break
 
-	if (!spelling && tospell > 0) {
-		spelling = true;
-		var xh = _xhttp();
-		osp=osp.substr(0,osp.length-1);
-		xh.open("GET", "spell.cgi?"+osp, true);
-		xh.onreadystatechange = function() {
-			if (xh.readyState == 4) {
-				var j;
-				var a = xh.responseText.split("\n");
-				for (j = 0; j < a.length; j++) {
-					var kp = a[j].split("=", 2);
-					var k, v;
-					if (kp.length == 2) {
-						k = kp[0];
-						v = kp[1];
-					} else if (kp.length == 1) {
-						k = kp[0];
-						v = '';
-					} else {
-						k = a[j];
-						v = '';
-					}
-					if (k.substr(0,1) != 'c') continue;
-					k = k.substr(1, k.length-1);
-					var term = spellcheck[k];
-					if (v == undefined || v == '') {
-						brokenwords[term] = true;
-						suggestions[term] = new Array();
-					} else if (v == term) {
-						safewords[term] = true;
-					} else {
-						safewords[v] = true;
-						if (!suggestions[term]) {
-							suggestions[term] = new Array();
-						}
-						suggestions[term][ suggestions[term].length ] = v;
-						brokenwords[term] = true;
-					}
-				}
-				spelling=false;
-				window.setTimeout(term_redraw,10);
-				xh = undefined; // break (deferred)
-			}
-		};
-		xh.send(undefined);
-	}
 	if (cursory == (h-1)) {
 		tools.style.display = 'none';
 	} else {

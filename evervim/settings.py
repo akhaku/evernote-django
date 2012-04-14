@@ -108,6 +108,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'account',
+    'bs4',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

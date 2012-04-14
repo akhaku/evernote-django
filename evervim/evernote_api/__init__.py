@@ -2,6 +2,7 @@
     https://github.com/leehsueh/django-evernote-oauth/. Many many thanks to him
     for doing the legwork!
 """
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from evernote.edam.notestore import NoteStore
@@ -108,4 +109,5 @@ class EvernoteAPI:
         note = notestore.getNote(self.oauth_token, guid, True, False,
                 False, False)
         text = note.content
-        return text
+        soup = BeautifulSoup(text)
+        return soup.find('en-note').get_text()
