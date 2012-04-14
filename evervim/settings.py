@@ -116,7 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'evernote',
-    'evernote_auth',
+    'evernote_api',
     'south',
     'edit',
 )

@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from evernote_auth import EvernoteAPI
+from evernote_api import EvernoteAPI
 import logging
 
 def get_evernote_token(request):
