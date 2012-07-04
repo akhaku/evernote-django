@@ -5,9 +5,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'edit.views.home'),
-    url(r'^edit/$', 'edit.views.edit_note'),
-    url(r'^edit/(?P<guid>[\w-]+)/$', 'edit.views.edit_note'),
+    url(r'^$', 'note.views.home'),
+    url(r'^note/', include('note.urls')),
     url(r'^account/', include('account.urls')),
     url(r'^evernote/', include('evernote_api.urls')),
     url(r'^admin/', include(admin.site.urls)),

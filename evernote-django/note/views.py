@@ -21,8 +21,3 @@ def home(request):
     allnotes = [{'title': n.title, 'id': n.guid} for n in allnotes]
     return render_to_response('home.html', {'notes': allnotes},
             context_instance=RequestContext(request))
-
-def edit_note(request, guid=None):
-    profile = request.user.profile
-    everAPI = EvernoteAPI(profile.evernote_token, profile.evernote_shard)
-    return HttpResponse(everAPI.get_note_text(guid))

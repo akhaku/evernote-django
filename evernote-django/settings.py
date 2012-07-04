@@ -116,7 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'edit',
+    'note',
     'evernote',
     'evernote_api',
     'gunicorn',
