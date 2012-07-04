@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Djangonote</title>
+        <title>evernote-django</title>
         <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/main.css" />
         {% block extrastyle %}
         {{ extrastyle }}
@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="header">
-        <div class="left">Djangonote</div> 
+        <div class="left">evernote-django</div> 
         {% if user.is_authenticated %}
         <div class="right">Logged in as {{ user.get_full_name }}
             <br/>

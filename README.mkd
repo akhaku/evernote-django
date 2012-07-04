@@ -1,4 +1,4 @@
-# Djangonote #
+# evernote-django #
 
 A Django/python wrapper for the Evernote API
 Author: akhaku (Ammar Khaku)

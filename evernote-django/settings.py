@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'Djangonote.urls'
+ROOT_URLCONF = 'evernote-django.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates'),
