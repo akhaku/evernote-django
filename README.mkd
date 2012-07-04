@@ -1,6 +1,7 @@
 # evernote-django #
 
 A Django/python wrapper for the Evernote API
+
 Author: akhaku (Ammar Khaku)
 
 N.B. The only apps you need are evernote_api, evernote and thrift. The rest
@@ -25,3 +26,23 @@ are there for demonstration purposes.
     * EVERNOTE_OAUTH_COMPLETE_URL : Redirect URL after the OAuth flow
     * EVERNOTE_OAUTH_TOKEN_VALIDITY : OAuth token validity in days 
 
+## Usage Instructions ##
+
+The following is an example of sending a user through the OAuth flow:
+
+    from evernote_api import EvernoteAPI
+    from django.core.urlresolvers import reverse
+    everAPI = EvernoteAPI()
+    callback_url = request.build_absolute_url(everAPI.token_callback_url)
+    return everAPI.get_token(request, callback_url)
+
+The user goes through the OAuth flow and ends up at the url specified in
+EVERNOTE_OAUTH_COMPLETE_URL. From the view that handles that url, the token
+and related info is stored in four session variables:
+
+    request.session['oauth_token'] # stores the OAuth token
+    request.session['expires']     # stores the token expires time
+    request.session['edam_shard']  # stores the shard the user belongs to
+    request.session['edam_userId'] # stores the user id
+
+Remember to extract these and then delete them from the session.

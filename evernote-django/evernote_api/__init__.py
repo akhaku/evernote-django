@@ -3,6 +3,7 @@
 """
 from bs4 import BeautifulSoup
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from evernote.edam.notestore import NoteStore
 from evernote.edam.notestore.ttypes import NoteFilter
@@ -14,6 +15,7 @@ import urllib2
 import urlparse
 
 class EvernoteAPI:
+    token_callback_url = ""
     evernoteHost = settings.EVERNOTE_HOST
     tempCredentialRequestUri = "https://" + evernoteHost + "/oauth"
     resOwnerAuthUri = "https://" + evernoteHost + "/OAuth.action"
@@ -30,6 +32,8 @@ class EvernoteAPI:
         self.shard = shard
         self.uid = uid
         self.exp = exp
+        self.token_callback_url = reverse('evernote_api.views.get_evernote_token',
+                args=[])
 
     def get_token(self, request, callback):
         request_params = dict(oauth_consumer_key = self.consumerKey,
