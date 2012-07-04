@@ -28,10 +28,11 @@ are there for demonstration purposes.
 
 ## Usage Instructions ##
 
+### OAuth ###
+
 The following is an example of sending a user through the OAuth flow:
 
     from evernote_api import EvernoteAPI
-    from django.core.urlresolvers import reverse
     everAPI = EvernoteAPI()
     callback_url = request.build_absolute_url(everAPI.token_callback_url)
     return everAPI.get_token(request, callback_url)
@@ -46,3 +47,13 @@ and related info is stored in four session variables:
     request.session['edam_userId'] # stores the user id
 
 Remember to extract these and then delete them from the session.
+
+
+### Notestore API calls ###
+
+All notestore calls must use an EvernoteAPI instance created with the user's
+oauth token and shard number. See the following example:
+
+    profile = request.user.profile
+    everAPI = EvernoteAPI(profile.evernote_token, profile.evernote_shard)
+    tagged = everAPI.get_notes_with_tag("sometag")
