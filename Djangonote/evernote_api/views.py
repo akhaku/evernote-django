@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
 from evernote_api import EvernoteAPI
+from django.conf import settings
 import logging
 
 def get_evernote_token(request):
@@ -11,7 +11,11 @@ def get_evernote_token(request):
     if request.user.is_authenticated:
         everAuth = EvernoteAPI()
         credentials = everAuth.get_user_token(request)
-        # credentials here contain OAuth token, save it!
+        """ credentials is of the form: { 'oauth_token': token,
+                                          'expires'    : datetime,
+                                          'edam_shard' : shard,
+                                          'edam_userId': uid }
+        """                        
         profile = request.user.profile
         try:
             expires_time = datetime.fromtimestamp(int(credentials['expires']))
@@ -23,4 +27,4 @@ def get_evernote_token(request):
         profile.evernote_shard = credentials['edam_shard']
         profile.evernote_uid = credentials['edam_userId']
         profile.save()
-    return HttpResponseRedirect(reverse('edit.views.home', args=[]))
+    return HttpResponseRedirect(settings.EVERNOTE_OAUTH_COMPLETE_URL)

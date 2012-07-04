@@ -1,6 +1,5 @@
-""" Most of this is modified from Hain-Lee's (leehsueh) great work at
-    https://github.com/leehsueh/django-evernote-oauth/. Many many thanks to him
-    for doing the legwork!
+""" Based on Hain-Lee's (leehsueh) great work at
+    https://github.com/leehsueh/django-evernote-oauth/.
 """
 from bs4 import BeautifulSoup
 from django.conf import settings

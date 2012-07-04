@@ -1,2 +1,27 @@
-# Vimernote #
-Authors: akhaku (Ammar Khaku), ealter (Eliot Alter)
+# Djangonote #
+
+A Django/python wrapper for the Evernote API
+Author: akhaku (Ammar Khaku)
+
+N.B. The only apps you need are evernote_api, evernote and thrift. The rest
+are there for demonstration purposes.
+
+## Requirements ##
+- Beautifulsoup for XML parsing
+- The [Evernote Python SDK](https://github.com/evernote/evernote-sdk-python)
+(provided as evernote/)
+- A Python implementation of the [Thrift](http://thrift.apache.org/) protocol
+(provided as thrift/)
+
+## Setup ##
+- Download the repository.
+- Remove everything but the three folders evernote_api, evernote and thrift.
+- Install Beautifulsoup.
+- Add evernote, evernote_api, thrift and bs4 to your INSTALLED_APPS.
+- Add the following settings to your settings.py:
+    * EVERNOTE_HOST : sandbox.evernote.com for dev
+    * EVERNOTE_KEY : Your Evernote consumer key
+    * EVERNOTE_SECRET : Your Evernote secret key
+    * EVERNOTE_OAUTH_COMPLETE_URL : Redirect URL after the OAuth flow
+    * EVERNOTE_OAUTH_TOKEN_VALIDITY : OAuth token validity in days 
+
