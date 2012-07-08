@@ -1,6 +1,3 @@
-""" Based on Hain-Lee's (leehsueh) great work at
-    https://github.com/leehsueh/django-evernote-oauth/.
-"""
 from bs4 import BeautifulSoup
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -23,7 +20,6 @@ class EvernoteAPI:
     tokRequestUri = tempCredentialRequestUri
     consumerKey = settings.EVERNOTE_KEY
     consumerSecret = settings.EVERNOTE_SECRET
-
     userStoreUri = "https://" + evernoteHost + "/edam/user"
     noteStoreUriBase = "https://" + evernoteHost + "/edam/note/"
 
@@ -34,6 +30,13 @@ class EvernoteAPI:
         self.exp = exp
         self.token_callback_url = reverse('evernote_api.views.get_evernote_token',
                 args=[])
+
+    def _get_note_store(self):
+        noteStoreUri =  self.noteStoreUriBase + self.shard
+        noteStoreHttpClient = THttpClient.THttpClient(noteStoreUri)
+        noteStoreProtocol = TBinaryProtocol.TBinaryProtocol(noteStoreHttpClient)
+        noteStore = NoteStore.Client(noteStoreProtocol)
+        return noteStore
 
     def get_token(self, request, callback):
         request_params = dict(oauth_consumer_key = self.consumerKey,
@@ -92,14 +95,10 @@ class EvernoteAPI:
         else:
             return None
 
-    def _get_note_store(self):
-        noteStoreUri =  self.noteStoreUriBase + self.shard
-        noteStoreHttpClient = THttpClient.THttpClient(noteStoreUri)
-        noteStoreProtocol = TBinaryProtocol.TBinaryProtocol(noteStoreHttpClient)
-        noteStore = NoteStore.Client(noteStoreProtocol)
-        return noteStore
 
     def get_notes_with_tag(self, tag):
+        """ Gets all the notes with the tag "tag"
+        """
         notestore = self._get_note_store()
         allTags = notestore.listTags(self.oauth_token)
         tag = [x for x in allTags if x.name == tag][0]
@@ -107,10 +106,13 @@ class EvernoteAPI:
         notes = notestore.findNotes(self.oauth_token, nFilter, 0, 10)
         return notes.notes
 
-    def get_note_text(self, guid):
+    def get_note_text(self, note_guid):
+        """ Gets the text of the note with guid note_guid
+        """
         notestore = self._get_note_store()
-        note = notestore.getNote(self.oauth_token, guid, True, False,
+        note = notestore.getNote(self.oauth_token, note_guid, True, False,
                 False, False)
         text = note.content
         soup = BeautifulSoup(text)
         return soup.find('en-note').get_text()
+
